@@ -45,7 +45,7 @@ async function main() {
   // Create Products
   const potatoes = await prisma.product.create({
     data: {
-      name: 'Cartofi Bio',
+      name: 'Cartofi',
       basePrice: 12.5,
       TTL: 30,
       imageURL: 'https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&w=400&q=80',
@@ -54,7 +54,7 @@ async function main() {
 
   const tomatoes = await prisma.product.create({
     data: {
-      name: 'Roșii Căruță',
+      name: 'Rosii',
       basePrice: 15.0,
       TTL: 10,
       imageURL: 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=400&q=80',
@@ -63,7 +63,7 @@ async function main() {
 
   const carrots = await prisma.product.create({
     data: {
-      name: 'Morcovi Proaspeți',
+      name: 'Morcovi',
       basePrice: 8.5,
       TTL: 20,
       imageURL: 'https://images.unsplash.com/photo-1598170845058-12ef4a457939?auto=format&fit=crop&w=400&q=80',
@@ -72,7 +72,7 @@ async function main() {
 
   const apples = await prisma.product.create({
     data: {
-      name: 'Mere Roșii',
+      name: 'Mere',
       basePrice: 9.0,
       TTL: 15,
       imageURL: 'https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?auto=format&fit=crop&w=400&q=80',
@@ -81,7 +81,7 @@ async function main() {
 
   const bananas = await prisma.product.create({
     data: {
-      name: 'Banane Bio',
+      name: 'Banane',
       basePrice: 11.0,
       TTL: 7,
       imageURL: 'https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?auto=format&fit=crop&w=400&q=80',
@@ -90,7 +90,7 @@ async function main() {
 
   const milk = await prisma.product.create({
     data: {
-      name: 'Lapte Proaspăt 3.5%',
+      name: 'Lapte 3.5%',
       basePrice: 7.5,
       TTL: 5,
       imageURL: 'https://images.unsplash.com/photo-1563636619-e9143da7973b?auto=format&fit=crop&w=400&q=80',
@@ -170,7 +170,7 @@ async function main() {
       userId: alex.id,
       batchId: tomatoBatch.id,
       quantity: 2,
-      productName: 'Roșii Căruță',
+      productName: 'Rosii',
       appliedPrice: 15.0,
       discountedPrice: 0.5,
       imageURL: tomatoes.imageURL!,
@@ -182,7 +182,7 @@ async function main() {
       userId: alex.id,
       batchId: null,
       quantity: 3,
-      productName: 'Cartofi Bio',
+      productName: 'Cartofi',
       appliedPrice: 12.5,
       discountedPrice: 1.0,
       imageURL: potatoes.imageURL!,
@@ -201,7 +201,7 @@ async function main() {
   await prisma.orderItem.create({
     data: {
       orderId: pastOrder.id,
-      productName: 'Morcovi Proaspeți',
+      productName: 'Morcovi',
       imageURL: carrots.imageURL!,
       quantity: 2,
       price: 8.5,
@@ -211,7 +211,7 @@ async function main() {
   await prisma.orderItem.create({
     data: {
       orderId: pastOrder.id,
-      productName: 'Mere Roșii',
+      productName: 'Mere',
       imageURL: apples.imageURL!,
       quantity: 3,
       price: 9.0,
