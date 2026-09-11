@@ -1,7 +1,7 @@
 import {useState} from "react";
-import {useServices} from "../context/ServiceContext.tsx";
-import {Header} from "./Header.tsx";
-import {Notification} from "./Notification.tsx";
+import {useServices} from "../../context/ServiceContext.tsx";
+import {Header} from "../misc/Header.tsx";
+import {Notification} from "../misc/Notification.tsx";
 
 export const AddProductPage = () => {
     const container = useServices();

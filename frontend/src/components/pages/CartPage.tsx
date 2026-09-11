@@ -1,10 +1,10 @@
-import {useServices} from "../context/ServiceContext.tsx";
+import {useServices} from "../../context/ServiceContext.tsx";
 import {useEffect, useState} from "react";
-import {CartProduct} from "./CartProduct.tsx";
-import {useAuth} from "../context/AuthContext.tsx";
-import type {CartItem} from "../models/CartItem.ts";
-import {Header} from "./Header.tsx";
-import {Notification} from "./Notification.tsx";
+import {CartProduct} from "../misc/CartProduct.tsx";
+import {useAuth} from "../../context/AuthContext.tsx";
+import type {CartItem} from "../../models/CartItem.ts";
+import {Header} from "../misc/Header.tsx";
+import {Notification} from "../misc/Notification.tsx";
 
 export const CartPage = () => {
     const container = useServices();
@@ -66,7 +66,7 @@ export const CartPage = () => {
     )
 
     return (
-        <div className="min-h-screen flex flex-col">
+        <div className="flex flex-col min-h-full pb-6">
 
             <Header title={"Your Cart"}/>
 
@@ -77,11 +77,11 @@ export const CartPage = () => {
                 ))}
             </div>
         </div>
-            <div className="left-0 w-full p-4 pb-40">
+            <div className="w-full pt-4 pb-2">
                 <button
                     onClick={() => handleConfirmOrder()}
                     style={{backgroundColor: '#7b8964'}}
-                    className="w-full relative flex items-center justify-center bg-[#879973] active:bg-[#768664] text-white text-[17px] font-semibold py-4 rounded-full transition-colors shadow-sm"
+                    className="w-full relative flex items-center justify-center bg-[#879973] active:bg-[#768664] text-white text-[17px] font-semibold py-3.5 rounded-full transition-colors shadow-sm"
                 >
                     Confirm Order
                     <span className="absolute right-5 text-xl font-light">

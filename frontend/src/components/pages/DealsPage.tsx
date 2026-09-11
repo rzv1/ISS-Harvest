@@ -1,9 +1,9 @@
-import {useServices} from "../context/ServiceContext.tsx";
+import {useServices} from "../../context/ServiceContext.tsx";
 import {useEffect, useState} from "react";
-import {DealProduct} from "./DealProduct.tsx";
-import type {DealDTO} from "../models/DealDTO.ts";
-import {Header} from "./Header.tsx";
-import {useAuth} from "../context/AuthContext.tsx";
+import {DealProduct} from "../misc/DealProduct.tsx";
+import type {DealDTO} from "../../models/DealDTO.ts";
+import {Header} from "../misc/Header.tsx";
+import {useAuth} from "../../context/AuthContext.tsx";
 
 export const DealsPage = () => {
     const container = useServices();
@@ -46,10 +46,10 @@ export const DealsPage = () => {
     )
 
     return (
-        <div className="min-h-screen pb-24">
+        <div className="pb-6 relative">
             <Header title="Freshness Deals"/>
-            <div className="fixed bottom-1/11 right-1/18 w-15 h-15 rounded-4xl justify-center flex bg-harvest-dark">
-                <h3 className="content-center text-2xl">💬</h3>
+            <div className="absolute top-2 right-0 w-12 h-12 rounded-full justify-center items-center flex bg-[#505f33] text-white shadow-md z-40">
+                <span className="text-xl">💬</span>
             </div>
             <div className="flex overflow-x-auto gap-2 pb-4 no-scrollbar">
                 <button

@@ -1,10 +1,10 @@
-import {useServices} from "../context/ServiceContext.tsx";
-import {Product} from "../models/Product.ts";
+import {useServices} from "../../context/ServiceContext.tsx";
+import {Product} from "../../models/Product.ts";
 import {useEffect, useState} from "react";
-import {CatalogProduct} from "./CatalogProduct.tsx";
-import {Header} from "./Header.tsx";
-import {useAuth} from "../context/AuthContext.tsx";
-import {Notification} from "./Notification.tsx";
+import {CatalogProduct} from "../misc/CatalogProduct.tsx";
+import {Header} from "../misc/Header.tsx";
+import {useAuth} from "../../context/AuthContext.tsx";
+import {Notification} from "../misc/Notification.tsx";
 
 export const CatalogPage = () => {
     const container = useServices();
@@ -44,7 +44,7 @@ export const CatalogPage = () => {
     )
 
     return (
-        <div className="min-h-screen pb-24">
+        <div className="pb-6">
             <Header title="Catalog View" />
             
             <div className="flex justify-between items-center mb-4 px-1">

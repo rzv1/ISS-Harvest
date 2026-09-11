@@ -1,8 +1,8 @@
-import {Header} from "./Header.tsx";
+import {Header} from "../misc/Header.tsx";
 import {useEffect, useState} from "react";
-import {useServices} from "../context/ServiceContext.tsx";
-import {StockCard} from "./StockCard.tsx";
-import type {Product} from "../models/Product.ts";
+import {useServices} from "../../context/ServiceContext.tsx";
+import {StockCard} from "../misc/StockCard.tsx";
+import type {Product} from "../../models/Product.ts";
 
 interface ProductWithStock{
     product: Product,

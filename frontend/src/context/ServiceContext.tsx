@@ -3,11 +3,8 @@ import { services, ServiceContainer } from "./ServiceContainer.ts";
 
 const ServiceContext = createContext<ServiceContainer>(services);
 
-interface ServiceProviderProps {
-    children: ReactNode;
-}
 
-export const ServiceProvider = ({ children } : ServiceProviderProps) => {
+export const ServiceProvider = ({ children } : {children: ReactNode}) => {
     return (
     <ServiceContext.Provider value={services}>
         {children}

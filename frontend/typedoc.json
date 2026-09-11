@@ -1,6 +1,7 @@
 {
   "$schema": "https://typedoc.org/schema.json",
-  "entryPoints": ["src/main.tsx"],
+  "entryPoints": ["src"],
   "out": "docs",
-  "name": "ISS-Harvest Frontend Docs"
+  "name": "ISS-Harvest Frontend Docs",
+  "entryPointStrategy": "expand"
 }

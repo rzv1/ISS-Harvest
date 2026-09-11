@@ -10,18 +10,13 @@ const AuthContext = createContext<AuthState>({
     setId: () => {},
 });
 
-interface AuthProviderProps{
-    children: ReactNode;
-}
-
-export const AuthProvider = ({children}: AuthProviderProps) => {
+export const AuthProvider = ({children}: {children: ReactNode}) => {
     const [id, setId] = useState<number | null>(null);
 
     return(
         <AuthContext.Provider value={{id, setId}}>
             {children}
         </AuthContext.Provider>
-    )
+    );
 }
-// eslint-disable-next-line react-refresh/only-export-components
 export const useAuth = () => useContext(AuthContext);

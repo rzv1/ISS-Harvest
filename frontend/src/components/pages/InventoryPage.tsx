@@ -1,10 +1,10 @@
 import { Users, Clock } from 'lucide-react'
 import { useState, useEffect } from 'react'
-import { useServices } from "../context/ServiceContext.tsx";
-import {StatCard} from "./StatCard.tsx";
-import {InventoryItem} from "./InventoryItem.tsx";
-import type {InventoryDTO} from "../models/InventoryDTO.ts";
-import {Header} from "./Header.tsx";
+import { useServices } from "../../context/ServiceContext.tsx";
+import {StatCard} from "../misc/StatCard.tsx";
+import {InventoryItem} from "../misc/InventoryItem.tsx";
+import type {InventoryDTO} from "../../models/InventoryDTO.ts";
+import {Header} from "../misc/Header.tsx";
 
 export const InventoryPage = () => {
     const handleDelete = async (id: number) => {

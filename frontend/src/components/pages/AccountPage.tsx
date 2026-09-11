@@ -1,16 +1,16 @@
-import {useServices} from "../context/ServiceContext.tsx";
-import {useEffect, useState} from "react";
-import {AccountCard} from "./AccountCard.tsx";
-import {BadgePercent, CalendarDays, DollarSign, ShoppingBag} from "lucide-react";
-import {OrderItem} from "./OrderItem.tsx";
-import {useAuth} from "../context/AuthContext.tsx";
-import type {Order} from "../models/Order.ts";
-import {Header} from "./Header.tsx";
+import { useServices } from "../../context/ServiceContext.tsx";
+import { useEffect, useState } from "react";
+import { AccountCard } from "../misc/AccountCard.tsx";
+import { BadgePercent, CalendarDays, DollarSign, ShoppingBag } from "lucide-react";
+import { OrderItem } from "../misc/OrderItem.tsx";
+import { useAuth } from "../../context/AuthContext.tsx";
+import type { Order } from "../../models/Order.ts";
+import { Header } from "../misc/Header.tsx";
 
 export const AccountPage = () => {
     const container = useServices();
     const service = container.inventoryService;
-    const {id} = useAuth();
+    const { id } = useAuth();
     const [orders, setOrders] = useState<Order[]>([]);
     const [total, setTotal] = useState(0);
     const [totalSaved, setTotalSaved] = useState(0);
@@ -18,26 +18,26 @@ export const AccountPage = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        if(id)
-        service.getAllOrdersForUser(id).then(res => {
-            setLoading(true);
-            let newTotal = 0;
-            let newTotalSaved = 0;
-            let newTotalOrders = 0;
-            res?.forEach(order => {
-                newTotal = newTotal + Number(order.total);
-                newTotalSaved = newTotalSaved + Number(order.total) * 0.16;
-                newTotalOrders = newTotalOrders + 1;
+        if (id)
+            service.getAllOrdersForUser(id).then(res => {
+                setLoading(true);
+                let newTotal = 0;
+                let newTotalSaved = 0;
+                let newTotalOrders = 0;
+                res?.forEach(order => {
+                    newTotal = newTotal + Number(order.total);
+                    newTotalSaved = newTotalSaved + Number(order.total) * 0.16;
+                    newTotalOrders = newTotalOrders + 1;
+                })
+                setTotal(newTotal); setTotalSaved(newTotalSaved); setTotalOrders(newTotalOrders);
+                if (res)
+                    setOrders(res);
+                setLoading(false);
             })
-            setTotal(newTotal); setTotalSaved(newTotalSaved); setTotalOrders(newTotalOrders);
-            if(res)
-                setOrders(res);
-            setLoading(false);
-        })
     }, [service, id]);
     return (
         <div>
-            <Header title={"Account Statistics"}/>
+            <Header title={"Account Statistics"} />
 
             <div className="grid grid-cols-2 gap-3 pb-6">
                 <AccountCard
@@ -77,9 +77,9 @@ export const AccountPage = () => {
                         <p className="mt-4 text-[#8fb07d] font-medium animate-pulse">Fetching orders...</p>
                     </div>
                 </div>
-                )}
+            )}
 
-            <div className="flex flex-col pb-22">
+            <div className="flex flex-col pb-6">
                 {orders.map((order, idx) => (
                     <OrderItem
                         key={order.id}

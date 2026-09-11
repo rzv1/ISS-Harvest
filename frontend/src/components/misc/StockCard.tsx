@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {useServices} from "../context/ServiceContext.tsx";
+import {useServices} from "../../context/ServiceContext.tsx";
 
 interface Product{
     id: number;
@@ -29,9 +29,9 @@ export const StockCard = ({id, name, image, units}: Product) => {
             )}
 
             <div className="flex items-center gap-4 mb-4">
-                <img src={image} alt={name}
-                    className="w-20 h-20 object-contain rounded-lg"
-                />
+                <div className="w-20 h-20 bg-gray-50 rounded-xl overflow-hidden shrink-0">
+                    <img src={image} alt={name} className="w-full h-full object-cover rounded-xl" />
+                </div>
                 <div>
                     <h3 className="text-xl font-bold text-gray-800">
                         {name} - 1Kg

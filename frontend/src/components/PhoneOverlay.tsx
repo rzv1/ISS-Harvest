@@ -1,10 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, type ReactNode } from 'react';
 
-interface PhoneOverlayProps {
-  children: React.ReactNode;
-}
 
-export const PhoneOverlay: React.FC<PhoneOverlayProps> = ({ children }) => {
+export const PhoneOverlay = ({ children }: { children: ReactNode }) => {
   const [time, setTime] = useState('');
 
   useEffect(() => {
@@ -22,17 +19,17 @@ export const PhoneOverlay: React.FC<PhoneOverlayProps> = ({ children }) => {
   return (
     <>
       {/* MOBILE VIEW (max-width: 639px): No overlay, full screen rendering */}
-      <div className="sm:hidden w-full min-h-screen bg-[#f3f5ef] dark:bg-[#121512] flex flex-col">
+      <div className="sm:hidden w-full h-[100dvh] max-h-[100dvh] bg-[#f3f5ef] dark:bg-[#121512] flex flex-col overflow-hidden relative">
         {children}
       </div>
 
       {/* DESKTOP / TABLET VIEW (min-width: 640px): Centered Smartphone Frame Overlay */}
-      <div className="hidden sm:flex min-h-screen w-full bg-[#121811] items-center justify-center p-4 md:p-8 font-sans antialiased select-none relative overflow-hidden">
+      <div className="hidden sm:flex h-screen max-h-screen w-full bg-[#121811] items-center justify-center p-2 sm:p-4 font-sans antialiased select-none relative overflow-hidden">
         {/* Ambient background glow */}
         <div className="fixed inset-0 bg-radial from-[#2d3a27]/30 via-[#121811] to-black pointer-events-none" />
 
         {/* Phone outer wrapper with side buttons */}
-        <div className="relative w-[390px] h-[844px] flex items-center justify-center z-10 my-auto">
+        <div className="relative h-[min(850px,calc(100vh-2rem))] aspect-[9/18.5] flex items-center justify-center z-10 my-auto shrink-0">
           
           {/* Left Side Hardware Buttons (Volume Up/Down) */}
           <div className="absolute -left-[14px] top-28 w-[4px] h-12 bg-gradient-to-r from-gray-600 to-gray-800 rounded-l-md shadow-md" />
@@ -41,7 +38,7 @@ export const PhoneOverlay: React.FC<PhoneOverlayProps> = ({ children }) => {
           <div className="absolute -right-[14px] top-36 w-[4px] h-16 bg-gradient-to-l from-gray-600 to-gray-800 rounded-r-md shadow-md" />
 
           {/* Main Phone Body Frame */}
-          <div className="w-[390px] h-[844px] bg-[#1a1d18] border-[12px] border-[#282d25] rounded-[48px] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9)] flex flex-col relative overflow-hidden ring-1 ring-white/10">
+          <div className="w-full h-full bg-[#1a1d18] border-[10px] sm:border-[12px] border-[#282d25] rounded-[44px] sm:rounded-[48px] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9)] flex flex-col relative overflow-hidden ring-1 ring-white/10">
             
             {/* Top Notch / Dynamic Island */}
             <div className="absolute top-0 inset-x-0 h-10 flex justify-center items-center z-50 pointer-events-none">
@@ -79,7 +76,7 @@ export const PhoneOverlay: React.FC<PhoneOverlayProps> = ({ children }) => {
             </div>
 
             {/* Phone Inner Screen Viewport */}
-            <div className="flex-1 w-full bg-[#f3f5ef] dark:bg-[#121512] overflow-y-auto overflow-x-hidden relative flex flex-col scrollbar-none">
+            <div className="flex-1 w-full bg-[#f3f5ef] dark:bg-[#121512] overflow-hidden relative flex flex-col min-h-0">
               {children}
             </div>
 

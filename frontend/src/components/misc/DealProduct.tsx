@@ -11,11 +11,11 @@ interface DealProductProps{
 export const DealProduct = ({id, imageURL, name, price, discountedPrice, closestExpiry, onAddClick}: DealProductProps) => {
     return (
         <div className="bg-white rounded-2xl p-3 flex flex-col shadow-sm border border-gray-100">
-            <div className="w-full h-28 mb-2 flex items-center justify-center">
+            <div className="w-full h-32 mb-2 rounded-xl overflow-hidden bg-gray-50 flex items-center justify-center shrink-0">
                 <img
                     src={imageURL}
                     alt={name}
-                    className="max-h-full max-w-full object-contain"
+                    className="w-full h-full object-cover rounded-xl"
                 />
             </div>
 

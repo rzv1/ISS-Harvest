@@ -13,11 +13,11 @@ interface CartProductProps{
 export const CartProduct = ({id, productName, imageURL, appliedPrice, discountedPrice, quantity, onIncrement, onDecrement, onDelete}:CartProductProps) => {
     return (
         <div className="flex items-center gap-4 py-4 border-b border-gray-200/60 last:border-0">
-            <div className="w-25 h-25 bg-white rounded-2xl shadow-sm flex items-center justify-center p-2 shrink-0">
+            <div className="w-20 h-20 bg-gray-50 rounded-2xl shadow-sm overflow-hidden flex items-center justify-center shrink-0">
                 <img
                     src={imageURL}
                     alt={productName}
-                    className="max-h-full max-w-full object-contain"
+                    className="w-full h-full object-cover rounded-2xl"
                 />
             </div>
 

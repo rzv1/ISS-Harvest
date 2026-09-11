@@ -9,11 +9,11 @@ interface CatalogProductProps{
 export const CatalogProduct = ({id, name, imageURL, basePrice, onAddClick}: CatalogProductProps) => {
     return (
         <div className="bg-white rounded-2xl p-3 flex flex-col shadow-sm border border-gray-100/50">
-            <div className="w-full h-28 mb-3 flex items-center justify-center">
+            <div className="w-full h-32 mb-3 rounded-xl overflow-hidden bg-gray-50 flex items-center justify-center shrink-0">
                 <img
                     src={imageURL}
                     alt={name}
-                    className="max-h-full max-w-full object-contain"
+                    className="w-full h-full object-cover rounded-xl"
                 />
             </div>
 
