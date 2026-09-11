@@ -26,7 +26,7 @@ describe('Orders & OrderItems API Integration Tests', () => {
     const orderId = orderRes.body.id;
 
     // Fetch user orders
-    const getOrdersRes = await request(app).get(`/orders/${userId}`);
+    const getOrdersRes = await request(app).get(`/orders/users/${userId}`);
     expect(getOrdersRes.status).toBe(200);
     expect(getOrdersRes.body.length).toBe(1);
     expect(getOrdersRes.body[0].id).toBe(orderId);

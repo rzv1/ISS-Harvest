@@ -80,6 +80,6 @@ describe('Batches API Integration Tests', () => {
 
     // Verify deletion
     const getBatch = await request(app).get(`/batches/${batchId}`);
-    expect(getBatch.body).toBeNull();
+    expect(getBatch.body).toStrictEqual({});
   });
 });

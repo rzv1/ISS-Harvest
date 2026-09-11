@@ -58,7 +58,7 @@ describe('Users API Integration Tests', () => {
         password: 'wrongpassword',
       });
 
-    expect(loginRes.status).toBe(200);
-    expect(loginRes.body).toBeNull();
+    expect(loginRes.status).toBe(204);
+    expect(loginRes.body).toStrictEqual({});
   });
 });
