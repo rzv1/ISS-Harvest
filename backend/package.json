@@ -5,7 +5,19 @@
   "main": "index.ts",
   "scripts": {
     "test": "vitest run",
-    "start": "tsx index.ts"
+    "start": "tsx watch index.ts",
+    "seed": "tsx prisma/seed.ts",
+    "docs": "typedoc --out docs",
+    "tsoa:spec": "tsoa spec",
+    "tsoa:routes": "tsoa routes",
+    "tsoa:gen": "tsoa spec-and-routes",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:studio": "prisma studio",
+    "prisma:push": "prisma db push",
+    "prisma:reset": "prisma migrate reset --force",
+    "check-circular": "madge src/ --circular",
+    "graph": "madge --extensions ts,tsx --ts-config tsconfig.json src/ --image graph.png"
   },
   "keywords": [],
   "author": "",
@@ -18,14 +30,22 @@
     "cors": "^2.8.6",
     "dotenv": "^17.3.1",
     "express": "^5.2.1",
-    "prisma": "^7.4.2"
+    "prisma": "^7.4.2",
+    "swagger-jsdoc": "^6.3.0",
+    "swagger-ui-express": "^5.0.1",
+    "tsoa": "^7.0.0-alpha.0"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.19",
     "@types/express": "^5.0.0",
     "@types/node": "^22.0.0",
     "@types/supertest": "^6.0.2",
+    "@types/swagger-jsdoc": "^6.0.4",
+    "@types/swagger-ui-express": "^4.1.8",
+    "madge": "^8.0.0",
     "supertest": "^7.0.0",
     "tsx": "^4.19.2",
+    "typedoc": "^0.28.20",
     "vitest": "^3.0.5"
   }
 }
