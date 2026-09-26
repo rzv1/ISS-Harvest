@@ -1,0 +1,52 @@
+erDiagram
+    User ||--o{ CartItem : has
+    User ||--o{ Order : places
+    Order ||--o{ OrderItem : contains
+    Batch ||--o{ CartItem : contains
+    Product ||--o{ Batch : creates
+
+    User {
+        long id PK
+        string username
+        string password
+        string role
+        date createdAt
+    }
+    Product {
+        long id PK
+        string name
+        string? imageURL
+        float basePrice
+        int TTL
+    }
+    Batch {
+        long id PK
+        long productId FK
+        int quantity
+        date addedAt
+        date expiresAt
+    }
+    CartItem {
+        long id PK
+        long userId FK
+        long? batchId FK
+        int quantity
+        string imageURL
+        string productName
+        float appliedPrice
+        float discountedPrice
+    }
+    Order {
+        long id PK
+        long userId FK
+        date timestamp
+        float total
+    }
+    OrderItem {
+        long id PK
+        long orderId FK
+        string productName
+        string imageURL
+        int quantity
+        float price
+    }

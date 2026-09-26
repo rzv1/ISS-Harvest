@@ -1,0 +1,10 @@
+graph LR
+    Login["/login"] -->|Login| Home["/"]
+    Login["/login"] -->|Login| Manager["/manager"]
+    Home["/"] -->|Click Catalog / default| Catalog["/catalog"]
+    Home --> |Click Deals| Deals["/deals"]
+    Home -->|Click Cart| Cart["/cart"]
+    Home -->|Click Account| Account["/account"]
+    Manager -->|Inventory / default| ManagerInv["/manager/inventory"]
+    Manager -->|Stock| ManagerStock["/manager/stock"]
+    Manager -->|Add| ManagerOrders["/manager/add"]

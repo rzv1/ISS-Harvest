@@ -5,19 +5,19 @@
   "main": "index.ts",
   "scripts": {
     "test": "vitest run",
-    "start": "tsx watch index.ts",
+    "start": "tsx watch src/index.ts",
     "seed": "tsx prisma/seed.ts",
     "docs": "typedoc --out docs",
     "tsoa:spec": "tsoa spec",
     "tsoa:routes": "tsoa routes",
-    "tsoa:gen": "tsoa spec-and-routes",
+    "tsoa:build": "tsoa spec-and-routes",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
     "prisma:studio": "prisma studio",
     "prisma:push": "prisma db push",
     "prisma:reset": "prisma migrate reset --force",
     "check-circular": "madge src/ --circular",
-    "graph": "madge --extensions ts,tsx --ts-config tsconfig.json src/ --image graph.png"
+    "graph": "madge --extensions ts,tsx src/ --image graph.png"
   },
   "keywords": [],
   "author": "",

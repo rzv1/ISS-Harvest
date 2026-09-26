@@ -1,0 +1,93 @@
+sequenceDiagram
+    autonumber
+    actor Client as Customer / Client
+    participant UI as CartPage (Frontend UI)
+    participant CS as CartService (Frontend Service)
+    participant API as REST API Gateway (Express / Controllers)
+    participant DB as Prisma ORM / Database (SGBD)
+
+    %% 1. User initiates order finalization
+    Client->>UI: Press "Confirm Order" (handleConfirmOrder)
+    activate UI
+
+    UI->>CS: confirmOrder(userId)
+    activate CS
+
+    %% 2. Fetch cart items for current user
+    CS->>API: GET /api/cartItems/users/{userId}
+    activate API
+    API->>DB: prisma.cartItem.findMany({ where: { userId } })
+    activate DB
+    DB-->>API: List<CartItem>
+    deactivate DB
+    API-->>CS: 200 OK (List<CartItem>)
+    deactivate API
+
+    %% 3. Check stock availability for each item in cart
+    loop Pentru fiecare cartItem (cu batchId)
+        CS->>API: GET /api/batches/{batchId}
+        activate API
+        API->>DB: prisma.batch.findUnique({ where: { id: batchId } })
+        activate DB
+        DB-->>API: Batch details (quantity)
+        deactivate DB
+        API-->>CS: 200 OK (Batch details)
+        deactivate API
+
+        alt Stock unavailable (batch.quantity < item.quantity)
+            CS-->>UI: return { text: "Selected quantity exceeds stock!", type: "fail" }
+            UI-->>Client: Show error notification ("Stoc insuficient!")
+        end
+    end
+
+    %% 4. Stock validation passed: Create Order & Process Items
+    alt Stock available for all products
+        CS->>API: POST /api/orders { userId, total }
+        activate API
+        API->>DB: prisma.order.create({ data: { userId, total } })
+        activate DB
+        DB-->>API: Order Object (id, userId, total, timestamp)
+        deactivate DB
+        API-->>CS: 201 Created (Order Object)
+        deactivate API
+
+        %% 5. Save order items, update stock, and clear cart
+        loop Pentru fiecare cartItem
+            CS->>API: POST /api/orderItems { orderId, productName, quantity, price }
+            activate API
+            API->>DB: prisma.orderItem.create(...)
+            activate DB
+            DB-->>API: 201 Created (OrderItem)
+            deactivate DB
+            API-->>CS: 201 Created
+            deactivate API
+
+            opt Produsul provine dintr-un lot (batchId exista)
+                CS->>API: PATCH /api/batches/{batchId} { quantity: newQuantity }
+                activate API
+                API->>DB: prisma.batch.update({ where: { id }, data: { quantity } })
+                activate DB
+                DB-->>API: Updated Batch
+                deactivate DB
+                API-->>CS: 200 OK
+                deactivate API
+            end
+
+            CS->>API: DELETE /api/cartItems/{cartItemId}
+            activate API
+            API->>DB: prisma.cartItem.delete({ where: { id: cartItemId } })
+            activate DB
+            DB-->>API: 200 OK / 204 No Content
+            deactivate DB
+            API-->>CS: 200 OK
+            deactivate API
+        end
+
+        CS-->>UI: return { text: "Order confirmed!", type: "success" }
+        UI->>UI: refreshCart()
+        UI-->>Client: Show success notification ("Order confirmed!")
+    end
+
+    deactivate CS
+    deactivate UI
+

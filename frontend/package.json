@@ -10,7 +10,7 @@
     "preview": "vite preview",
     "docs": "typedoc",
     "check-circular": "madge src/ --circular",
-    "graph": "madge --extensions ts,tsx --ts-config tsconfig.json src/ --image graph.png"
+    "graph": "madge --extensions ts,tsx src/ --image graph.png"
   },
   "dependencies": {
     "lucide-react": "^0.577.0",

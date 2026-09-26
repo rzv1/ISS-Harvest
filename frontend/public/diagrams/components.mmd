@@ -1,0 +1,63 @@
+graph TD
+    %% Entry Point & Core Wrappers
+    main[main.tsx] --> AuthProvider[AuthProvider.tsx]
+    AuthProvider --> App[App.tsx]
+    App --> Overlay[PhoneOverlay.tsx]
+
+    %% Main Routes & Layouts
+    Overlay -->|Route /login| LoginPage[LoginPage.tsx]
+    Overlay -->|Route /| CustomerLayout[CustomerLayout.tsx]
+    Overlay -->|Route /manager/*| ManagerLayout[ManagerLayout.tsx]
+
+    %% Customer Layout & Pages
+    CustomerLayout --> CustomerNav[CustomerNavbar.tsx]
+    CustomerLayout --> CatalogPage[CatalogPage.tsx]
+    CustomerLayout --> DealsPage[DealsPage.tsx]
+    CustomerLayout --> CartPage[CartPage.tsx]
+    CustomerLayout --> AccountPage[AccountPage.tsx]
+
+    %% Manager Layout & Pages
+    ManagerLayout --> ManagerNav[ManagerNavbar.tsx]
+    ManagerLayout --> InventoryPage[InventoryPage.tsx]
+    ManagerLayout --> AddProductPage[AddProductPage.tsx]
+    ManagerLayout --> StockPage[StockPage.tsx]
+
+    %% Customer Page Components
+    CatalogPage --> CatalogProduct[CatalogProduct.tsx]
+    DealsPage --> DealProduct[DealProduct.tsx]
+    CartPage --> CartProduct[CartProduct.tsx]
+    AccountPage --> AccountCard[AccountCard.tsx]
+    AccountPage --> OrderItem[OrderItem.tsx]
+
+    %% Manager Page Components
+    InventoryPage --> StatCard[StatCard.tsx]
+    InventoryPage --> InventoryItem[InventoryItem.tsx]
+    StockPage --> StockCard[StockCard.tsx]
+
+    %% Shared Components (Header & Notification)
+    LoginPage --> Header[Header.tsx]
+    CatalogPage --> Header
+    DealsPage --> Header
+    CartPage --> Header
+    AccountPage --> Header
+    InventoryPage --> Header
+    AddProductPage --> Header
+    StockPage --> Header
+
+    CatalogPage --> Notification[Notification.tsx]
+    DealsPage --> Notification
+    CartPage --> Notification
+    AddProductPage --> Notification
+    StockPage --> Notification
+
+    %% Styling / Category Color Definitions
+    classDef core fill:#f8fafc,stroke:#64748b,stroke-width:2px,color:#1e293b;
+    classDef layout fill:#eef2ff,stroke:#4f46e5,stroke-width:2px,color:#312e81;
+    classDef page fill:#ecfdf5,stroke:#10b981,stroke-width:2px,color:#064e3b;
+    classDef widget fill:#fff7ed,stroke:#f97316,stroke-width:2px,color:#7c2d12;
+
+    %% Category Assignments
+    class main,AuthProvider,App core;
+    class Overlay,CustomerLayout,ManagerLayout layout;
+    class LoginPage,CatalogPage,DealsPage,CartPage,AccountPage,InventoryPage,AddProductPage,StockPage page;
+    class CustomerNav,ManagerNav,CatalogProduct,DealProduct,CartProduct,AccountCard,OrderItem,StatCard,InventoryItem,StockCard,Header,Notification widget;

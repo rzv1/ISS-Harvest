@@ -1,0 +1,79 @@
+graph TB
+    subgraph UI ["Layer UI (Pagini & Componente React)"]
+        UI_Customer["Customer Pages<br/>(Catalog, Deals, Cart, Account)"]
+        UI_Manager["Manager Pages<br/>(Inventory, AddProduct, Stock)"]
+        UI_Auth["Auth Page<br/>(LoginPage)"]
+    end
+
+    subgraph Contexts ["Context Layer (React Context API)"]
+        AuthCtx["AuthContext<br/>(State: id, setId)"]
+        ServiceCtx["ServiceContext<br/>(ServiceContainer)"]
+        HookAuth["useAuth() Hook"]
+        HookService["useServices() Hook"]
+    end
+
+    subgraph DI ["Dependency Injection Container"]
+        Container["ServiceContainer"]
+    end
+
+    subgraph Services ["Service Layer (Business Logic)"]
+        direction TB
+        AuthSvc["AuthService"]
+        InvSvc["InventoryService"]
+        CartSvc["CartService"]
+    end
+
+    subgraph Repositories ["Repository Layer (Data Access)"]
+        direction TB
+        UserRepo["UserRepo"]
+        ProductRepo["ProductRepo"]
+        BatchRepo["BatchItemRepo"]
+        CartRepo["CartItemRepo"]
+        OrderRepo["OrderRepo"]
+    end
+
+    subgraph Backend ["Backend API (REST Services)"]
+        API_Users["/api/users"]
+        API_Products["/api/products"]
+        API_Batches["/api/batches"]
+        API_Cart["/api/cart"]
+        API_Orders["/api/orders"]
+    end
+
+    UI ~~~ Backend
+    UI ~~~ Services
+
+
+    %% UI Context consumption
+    UI_Auth -->|Uses| HookAuth
+    UI_Customer -->|Uses| HookAuth
+    UI_Customer -->|Uses| HookService
+    UI_Manager -->|Uses| HookService
+    UI_Auth -->|Uses| HookService
+
+    %% Context Hooks connection
+    HookAuth -->|Accesses user state| AuthCtx
+    HookService -->|Accesses Container| ServiceCtx
+    ServiceCtx -->|Provides| Container
+
+    %% Container to Services & Repositories
+    Container -->|Injects| AuthSvc
+    Container -->|Injects| InvSvc
+    Container -->|Injects| CartSvc
+
+    %% Services to Repositories
+    AuthSvc -->|Calls| UserRepo
+    InvSvc -->|Calls| ProductRepo
+    InvSvc -->|Calls| BatchRepo
+    InvSvc -->|Calls| OrderRepo
+    CartSvc -->|Calls| CartRepo
+    CartSvc -->|Calls| OrderRepo
+    CartSvc -->|Calls| InvSvc
+
+    %% Repositories to REST API
+    UserRepo -->|HTTP GET/POST| API_Users
+    ProductRepo -->|HTTP GET/POST/DELETE| API_Products
+    BatchRepo -->|HTTP GET/POST/DELETE| API_Batches
+    CartRepo -->|HTTP GET/POST/DELETE| API_Cart
+    OrderRepo -->|HTTP GET/POST| API_Orders
+
